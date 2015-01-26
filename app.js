@@ -4,28 +4,31 @@ var nodemon = require('nodemon');
 var swig = require('swig');
 var _ = require('underscore');
 var routes = require('./routes/');
-var bodyParser = require('body-parser');
+//var bodyParser = require('body-parser');
 var app = express();
 
+var socketio = require('socket.io');
 
-app.use('/', routes);
+
+//app.use('/', routes);
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+//app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json
-app.use(bodyParser.json())
+//app.use(bodyParser.json())
 
 app.use(morgan('dev'));
 
 // designates entire folder as serving static content
 // The express.static() method takes a root directory parameter and returns a middleware function.
-app.use(express.static('public'));
+app.use(express.static('public'));    // what directory to look 
 
 app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 swig.setDefaults({ cache: false });
+
 
 
 var server = app.listen(3000, function () {
@@ -37,5 +40,10 @@ var server = app.listen(3000, function () {
 
 })
 
+
+// var server = app.listen(3000);
+var io = socketio.listen(server);
+
+routes(app, io);
 
 

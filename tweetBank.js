@@ -2,9 +2,10 @@ var express = require('express');
 var _ = require('underscore');
 
 var data = [];
+var id = 0;
 
 var add = function (name, text) {
-  data.push({ name: name, text: text });
+  data.push({ name: name, text: text, id: id++ });
 };
 
 var list = function () {

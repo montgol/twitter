@@ -2,16 +2,16 @@
  
 {% block content %}
    
-    <h1>Welcome to Twitter.js, Nimit!</h1>
+    <h1>{{title}}</h1>
   </div>
 <div>
 	  {% if showForm %}
-	  <form action="/submit" method="POST">
+	  <form action="/submit" method="POST" >
 	    <label for="name_field">Name:</label>
-	    <input name="name" type="text" id="name_field" />
+	    <input name="name" type="name" id="name_field" value="Enter Full Name"/>
 
 	    <label for="text_field">Text:</label>
-	    <input name="text" type="text" id="text_field" style="width: 350px;" />
+	    <input name="text" type="text" id="text_field" style="width: 350px;" value="message"/>
 
 	    <input type="submit" value="Submit" />
 	  </form>
@@ -19,15 +19,16 @@
   <div class="page-header">
   <div class="row">
     <div class="col-md-3">
-      <img src="https://pbs.twimg.com/profile_images/2450268678/olxp11gnt09no2y2wpsh_normal.jpeg"><br>
-      <b>Your Name</b><br>
+      <img src="http://lorempixel.com/48/48" /><br>
+      <b>Lynda Montgomery</b><br>
       100 followers
     </div>
     <div class="col-md-9">
-    
+    	<h2><b>All Tweets</b></h2>
       <!-- display tweets here -->
       {% for tweet in tweets %}
-      	<li><a href="/users/{{tweet.name}}">{{tweet.name}}</a> - {{tweet.text}}</li>
+    	<img src="http://lorempixel.com/48/48" />
+      	<li><a href="/users/{{tweet.name}}">{{tweet.name}}</a><br> {{tweet.text}}</li><br>
       {% endfor %}
       
     </div>
